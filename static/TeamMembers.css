@@ -1,0 +1,38 @@
+body {
+    background-image: url("/static/Assets/landingpage.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: azure;
+}
+
+li {
+    margin-bottom: 30px;
+    color: azure;
+}
+
+a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: azure;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    background-color: transparent;
+}
+
+a:active {
+    color: azure;
+    background-color: transparent;
+    text-decoration: underline;
+}
