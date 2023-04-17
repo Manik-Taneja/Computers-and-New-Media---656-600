@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='Data.css') }}">
+    </head>
+
+<body>
+    <table border="1px solid black" class="center">
+        <tr>
+            <th>Text</th>
+            <th>Start Time</th>
+            <th>Duration</th>
+            <th>End Time</th>
+            <th>Video</th>
+        </tr>
+        {% for item in srt_data %}
+        <tr>
+            <td>{{ item['text'] }}</td>
+            <td>{{ item['start'] }}</td>
+            <td>{{ item['duration'] }}</td>
+            <td>{{ item['endtime'] }}</td>
+            <td>
+                <video width="200" height="200" controls>
+                    <source src="{{item['filepath']}}" type="video/mp4">
+                </video>
+            </td>
+            
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+
+</html>
