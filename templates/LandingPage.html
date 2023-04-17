@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Computers and New Media | YouTube Summarizer</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='LandingPage.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<ul>
+			<li><a href="{{ url_for('TeamMembers') }}" >Team Members</a></li>
+			<li><a href="{{ url_for('Summarizer') }}">Summarizer</a></li>
+			<li><a href="{{ url_for('home') }}">Home</a></li>
+		</ul>
+		<br><br>
+		<h1 style="font-size: 100px;text-align: center; margin-top: 10px;">YouTube Summarizer</h1>
+	</div>
+	<!-- <div>
+		<h1 style="text-align: center;">Team Members: Manik Taneja, Avdhi Shah, Sindura Saraswati, Apoorva Sathe</h1>
+	</div> -->
+</body>
+
+</html>

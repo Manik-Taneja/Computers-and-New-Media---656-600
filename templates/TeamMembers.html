@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Computers and New Media | YouTube Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='TeamMembers.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container" style="margin-top: 100px;">
+        <h1 style="text-align: left;">Team Members:</h1>
+        <li style="font-size:xx-large;color: azure;">
+            <a href="https://www.linkedin.com/in/manik-taneja-9a05a815a/" target="_blank">Manik Taneja</a>
+        </li>
+        <li style="font-size:xx-large;">
+            <a href="https://www.linkedin.com/in/avdhi-shah/" target="_blank">Avdhi Shah</a>
+        </li>
+        <li style="font-size:xx-large;">
+            <a href="https://www.linkedin.com/in/sindurasaraswathi/" target="_blank">Sindura Saraswathi</a>
+        </li>
+        <li style="font-size:xx-large;">
+            <a href="https://www.linkedin.com/in/apoorvasathe/" target="_blank">Apoorva Sathe</a>
+        </li>
+        <form action="{{url_for('home') }}" method="post">
+            <input type="submit" class="btn btn-primary" value="Back To Home" style="margin-left: 400px;">
+        </form>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
