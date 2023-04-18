@@ -6,6 +6,12 @@ from moviepy.editor import *
 
 from pytube import YouTube
 
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from scipy.signal import find_peaks
+
 def generate_id(Link):
     text = Link.split('=')
     id = text[1]
@@ -33,7 +39,7 @@ def get_link(Link):
             text_corpus += " " + srt_data[i]['text']
     print(len(final_data))
     keyphrases = keywords(text_corpus)
-    print(type(keyphrases))
+    # print(type(keyphrases))
     keyphrases = list(keyphrases.split('\n'))
     indices_select = set()
     for word in keyphrases:
@@ -50,19 +56,58 @@ def get_link(Link):
     clip = VideoFileClip("static/Input/Link.mp4")
     for row in range(len(trimmed_data)):
         print("Creating subclip: {} ".format(counter))
+        ###############################################################################################################
+
+                                                        # OUTPUT FILE NAME AND TRIMMING
+
+        ###############################################################################################################
         outputName = 'static/Output/output_'+ str(counter) + '.mp4'
+        outputAudio = 'static/Audio/output_' + str(counter) + '.mp3'
+        # ouputGraph = 'static/Graph/output_' + str(counter) + '.png'
         startTime = trimmed_data[row]['start']
         endTime = trimmed_data[row]['endtime']
-        print(row)
+        # print(row)
         subclip_ = clip.subclip(startTime, endTime)
+        ###############################################################################################################
+
+                                                        # VIDEO PROCESSING
+
+        ###############################################################################################################
         subclip_.write_videofile(outputName)
+        ###############################################################################################################
+
+                                                        # AUDIO PROCESSING
+
+        ###############################################################################################################
+        subclip_.audio.write_audiofile(outputAudio)
+        ###############################################################################################################
+
+                                                        # CREATING GRAPHS
+
+        ###############################################################################################################
+        # wav_obj = subclip_.audio
+        # sample_freq = wav_obj.getframerate()
+        # n_samples = wav_obj.getnframes()
+        # t_audio = n_samples/sample_freq
+        # n_channels = wav_obj.getnchannels()
+        # signal_wave = wav_obj.readframes(n_samples)
+        # signal_array = np.frombuffer(signal_wave, dtype=np.int16)
+        # l_channel = signal_array[0::2]
+        # r_channel = signal_array[1::2]
+        # times = np.linspace(0, n_samples/sample_freq, num=n_samples)
+        # plt.figure()
+        # plt.plot(times, l_channel)
+        # plt.title('Left Channel')
+        # plt.ylabel('Signal Value')
+        # plt.xlabel('Time (s)')
+        # plt.xlim(0, t_audio)
+        # plt.savefig(ouputGraph, dpi = 300)
         trimmed_data[row]['filepath'] = outputName
+        trimmed_data[row]['audiopath'] = outputAudio
+        # trimmed_data[row]['graphpath'] = ouputGraph
+
         counter += 1
     print(trimmed_data)
-    # listofpath = []
-    # for row in range(len(trimmed_data)):
-    #     listofpath.append(trimmed_data[row]['filepath'])
-    # clips_ = concatenate_videoclips([VideoFileClip(file) for file in listofpath])
-    # final_clip = concatenate_videoclips(clips_)
-    # clips_.write_videofile('static/Output/Final.mp4')
+
+
     return trimmed_data

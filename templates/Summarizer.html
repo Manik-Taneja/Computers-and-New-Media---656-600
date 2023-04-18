@@ -27,13 +27,15 @@
 	<div class="container">
         <h1>Enter YouTube Video Link</h1>
 		<h2></h2>
-		<form action={{url_for('handle_Summarizer')}} method="post">
+		<form action="{{ url_for('handle_Summarizer') }}"method="post">
 			<div class="form-group">
 				<label for="Link">Link</label>
 				<input type="text" class="form-control" name="Link" placeholder="Link" id="Link" required>
 			</div>
 			<input type="submit" class="btn btn-primary" value="Submit">
-			<!-- <input type="submit" class="btn btn-primary" value="Back To Home" style="float: right;"  onClick="myFunction()"> -->
+			<form action="{{url_for('home') }}" method="post">
+				<input type="submit" class="btn btn-primary" value="Back To Home" style="float: right;">
+			</form>
 		</form>
 	</div>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

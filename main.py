@@ -23,7 +23,8 @@ def TeamMembers():
 def handle_Summarizer():
     if request.method == "POST" and "Link" in request.form:
         YTLink = request.form["Link"]
-        return get_link(YTLink)
+        srt_data = get_link(YTLink)
+        return render_template("data.html", srt_data = srt_data)
 
 
 app.run(port=8000, debug=True)

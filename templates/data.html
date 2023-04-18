@@ -12,6 +12,8 @@
             <th>Duration</th>
             <th>End Time</th>
             <th>Video</th>
+            <th>Audio</th>
+            <!-- <th>Graph-Audio</th> -->
         </tr>
         {% for item in srt_data %}
         <tr>
@@ -24,7 +26,17 @@
                     <source src="{{item['filepath']}}" type="video/mp4">
                 </video>
             </td>
-            
+            <td>
+                <audio width="200" height="200" controls>
+                    <source src="{{item['audiopath']}}" type="audio/mp3">
+                </audio>
+            </td>
+            <!-- <td>
+                <image width="200" height="200" controls>
+                    <source src="{{item['graphpath']}}" type="image/jpeg">
+                </image>
+            </td>
+             -->
         </tr>
         {% endfor %}
 
