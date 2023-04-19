@@ -66,13 +66,25 @@ def get_link(Link):
     print(len(trimmed_data))
     for row in range(len(trimmed_data)):
         trimmed_data[row]['endtime'] = round(trimmed_data[row]['start'] + trimmed_data[row]['duration'],3)
+    ###############################################################################################################
+
+                                     # TESTING TRIMMED DATA LIMITING TO 10 LINES
+
+    ###############################################################################################################
+
     # trimmed_data = trimmed_data[:10]
+
+    ###############################################################################################################
+
+                                        # INPUT PATH - ALREADY DOWNLOADED FILE
+
+    ###############################################################################################################
     counter = 1
     clip = VideoFileClip("static/Input/Link.mp4")
 
     ###############################################################################################################
 
-                                                    # DEBUG GRAPH STATEMENT
+                # DEBUG GRAPH STATEMENT TO PRINT GRAPHS, HEAD OVER TO data.html and enable those fields
 
     ###############################################################################################################
   
