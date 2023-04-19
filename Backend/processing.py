@@ -88,14 +88,14 @@ def get_link(Link):
 
     ###############################################################################################################
   
-    rungraph = 1
+    rungraph = 0
 
     ###############################################################################################################
 
                                                     # LOOPING OVER TRIMMED DATA
 
     ###############################################################################################################
-
+    sum_duration = 0
     for row in range(len(trimmed_data)):
         print("Creating subclip: {} ".format(counter))
         ###############################################################################################################
@@ -171,6 +171,8 @@ def get_link(Link):
         if rungraph == 1:
             trimmed_data[row]['graphpath'] = outputGraph
         counter += 1
+        sum_duration +=  trimmed_data[row]['duration']
+    print("Total Duration of the final video: {}".format(round(sum_duration/60,3)))
     # print(trimmed_data)
 
 
