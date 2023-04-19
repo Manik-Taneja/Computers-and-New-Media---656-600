@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Computers and New Media | YouTube Summarizer</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='ProposedSolution.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+		<h1 style="margin-left: 3cm;color: azure; margin-top: 5cm;">Proposed Solution:</h1>
+		<p style="margin-left: 3cm;color: azure;text-align: justify;text-justify: center;margin-right: 3cm;">
+			To meet the demands of massive video data, video summarization has been developed. The main goal of video summarization is the identification of pertinent and significant information.The flow of the project would be to download a youtube video, 
+			extract the SRT file for the same, and apply extractive summarization (different algorithms to test which one is better), based on the sentences and their referenced timestamps from the SRT file we will have a shortened version of the video. 
+			To set our project apart from any of the normal ideas we will also implement audio analysis that will include finding crests and troughs in the .wav file of the youtube video in order to find the points of high amplitude.
+			</p>
+			<p style="margin-left: 3cm;color: azure;text-align: justify;text-justify: center;margin-right: 3cm;">
+			Based on these two analysis we will provide custom weights to each analysis and output a summarized video that will be shorter and will contain maximum valuable information.
+			From a software standpoint we look forward to providing an optimized approach towards summarizing a youtube video while promoting the underlying Computers and New Media concepts such as clear narrative, ease of access and advantageous to its users. 
+		</p>
+	</div>
+	<br><br>
+	<div>
+		<form action="{{url_for('home') }}" method="post">
+			<input type="submit" class="btn btn-primary" value="Back To Home" style="margin-left: 18cm;" >
+		</form>
+	</div>
+</body>
+
+</html>

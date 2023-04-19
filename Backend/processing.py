@@ -9,8 +9,25 @@ from pytube import YouTube
 import numpy as np
 
 import matplotlib.pyplot as plt
+import librosa.display
 
-from scipy.signal import find_peaks
+import numpy as np
+
+import pandas as pd
+
+import librosa
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+import matplotlib.pyplot as plt
+import librosa.display
+from scipy import signal
+from scipy.io import wavfile
+
+import os
+import subprocess
+from scipy.io.wavfile import read
+# ffmpeg -i input_video.mp4 -b:a 192K -vn output_audio.mp3
+
 
 def generate_id(Link):
     text = Link.split('=')
@@ -23,8 +40,6 @@ def srt_generation(id):
 
 def get_link(Link):
     id = generate_id(Link)
-    # yt = YouTube(Link)
-    # yt.streams.filter(progressive=True, file_extension='mp4').download('static/Input/Link.mp4')
     srt_data = srt_generation(id)
     indices_pop = []
     for row in range(len(srt_data)):
@@ -39,7 +54,6 @@ def get_link(Link):
             text_corpus += " " + srt_data[i]['text']
     print(len(final_data))
     keyphrases = keywords(text_corpus)
-    # print(type(keyphrases))
     keyphrases = list(keyphrases.split('\n'))
     indices_select = set()
     for word in keyphrases:
@@ -52,8 +66,24 @@ def get_link(Link):
     print(len(trimmed_data))
     for row in range(len(trimmed_data)):
         trimmed_data[row]['endtime'] = round(trimmed_data[row]['start'] + trimmed_data[row]['duration'],3)
+    # trimmed_data = trimmed_data[:10]
     counter = 1
     clip = VideoFileClip("static/Input/Link.mp4")
+
+    ###############################################################################################################
+
+                                                    # DEBUG GRAPH STATEMENT
+
+    ###############################################################################################################
+  
+    rungraph = 1
+
+    ###############################################################################################################
+
+                                                    # LOOPING OVER TRIMMED DATA
+
+    ###############################################################################################################
+
     for row in range(len(trimmed_data)):
         print("Creating subclip: {} ".format(counter))
         ###############################################################################################################
@@ -62,11 +92,10 @@ def get_link(Link):
 
         ###############################################################################################################
         outputName = 'static/Output/output_'+ str(counter) + '.mp4'
-        outputAudio = 'static/Audio/output_' + str(counter) + '.mp3'
-        # ouputGraph = 'static/Graph/output_' + str(counter) + '.png'
+        outputAudio = 'static/Audio/output_' + str(counter) + '.wav'
+        outputGraph = 'static/Graph/output_' + str(counter) + '.png'
         startTime = trimmed_data[row]['start']
         endTime = trimmed_data[row]['endtime']
-        # print(row)
         subclip_ = clip.subclip(startTime, endTime)
         ###############################################################################################################
 
@@ -79,35 +108,58 @@ def get_link(Link):
                                                         # AUDIO PROCESSING
 
         ###############################################################################################################
-        subclip_.audio.write_audiofile(outputAudio)
+        # subclip_.audio.write_audiofile(outputAudio)
+        try:
+            os.remove(outputAudio)
+        except:
+            pass
+        subprocess.call(['ffmpeg', '-i', outputName, '-b:a', '192K', '-vn', outputAudio])
+        
         ###############################################################################################################
 
-                                                        # CREATING GRAPHS
+                                                        # SPECTROGRAM PROCESSING
 
         ###############################################################################################################
-        # wav_obj = subclip_.audio
-        # sample_freq = wav_obj.getframerate()
-        # n_samples = wav_obj.getnframes()
-        # t_audio = n_samples/sample_freq
-        # n_channels = wav_obj.getnchannels()
-        # signal_wave = wav_obj.readframes(n_samples)
-        # signal_array = np.frombuffer(signal_wave, dtype=np.int16)
-        # l_channel = signal_array[0::2]
-        # r_channel = signal_array[1::2]
-        # times = np.linspace(0, n_samples/sample_freq, num=n_samples)
-        # plt.figure()
-        # plt.plot(times, l_channel)
-        # plt.title('Left Channel')
-        # plt.ylabel('Signal Value')
-        # plt.xlabel('Time (s)')
-        # plt.xlim(0, t_audio)
-        # plt.savefig(ouputGraph, dpi = 300)
+        if rungraph == 1:
+            x, sr = librosa.load(outputAudio)
+            x = x [:10000]
+            fig = plt.figure(figsize=(10, 10))
+            ax = fig.add_subplot(111)
+            p = librosa.display.waveshow(x, sr=sr)
+            fig.savefig(outputGraph)
+
+
+        # plt.rcParams["figure.figsize"] = [7.50, 3.50]
+        # plt.rcParams["figure.autolayout"] = True
+        # input_data = read(outputAudio)
+        # audio = input_data[1]
+        # plt.plot(audio[0:1024])
+        # plt.ylabel("Amplitude")
+        # plt.xlabel("Time")
+        # plt.savefig(outputGraph)
+        # sample_rate, samples = wavfile.read(outputAudio)
+        # frequencies, times, spectrogram = signal.spectrogram(samples, sample_rate)
+        # print("F: {}".format(frequencies))
+        # print("T: {}".format(times))
+        # print("S: {}".format(spectrogram))
+        # plt.pcolormesh(times, frequencies, spectrogram)
+        # plt.imshow(spectrogram)
+        # plt.ylabel('Frequency [Hz]')
+        # plt.xlabel('Time [sec]')
+        # plt.savefig(outputGraph)
+
+        ###############################################################################################################
+
+                                                        # DEFINING PATHS
+
+        ###############################################################################################################
+
         trimmed_data[row]['filepath'] = outputName
         trimmed_data[row]['audiopath'] = outputAudio
-        # trimmed_data[row]['graphpath'] = ouputGraph
-
+        if rungraph == 1:
+            trimmed_data[row]['graphpath'] = outputGraph
         counter += 1
-    print(trimmed_data)
+    # print(trimmed_data)
 
 
     return trimmed_data

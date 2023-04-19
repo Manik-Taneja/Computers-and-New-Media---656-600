@@ -16,16 +16,28 @@
 <body>
 	<div class="container">
 		<ul>
+			<img width="100" height="70" src="/static/Assets/Logo.png" id="logo" style="float: left;">
 			<li><a href="{{ url_for('TeamMembers') }}" >Team Members</a></li>
+			<li><a href="{{ url_for('ProposedSolution') }}" >Proposed Solution</a></li>
 			<li><a href="{{ url_for('Summarizer') }}">Summarizer</a></li>
 			<li><a href="{{ url_for('home') }}">Home</a></li>
 		</ul>
 		<br><br>
 		<h1 style="font-size: 100px;text-align: center; margin-top: 10px;">YouTube Summarizer</h1>
 	</div>
-	<!-- <div>
-		<h1 style="text-align: center;">Team Members: Manik Taneja, Avdhi Shah, Sindura Saraswati, Apoorva Sathe</h1>
-	</div> -->
+	<br>
+	<br>
+	<div>
+		<h1 style="margin-left: 3cm;color: azure;">Abstract:</h1>
+		<p style="margin-left: 3cm;color: azure;text-align: justify;text-justify: center;margin-right: 3cm;">
+			Text, audio, and video are the three main modalities of video data. The current video summarization employs summarizing videos based on frame importance. While the nature of the solution 
+			gives results the algorithms do not utilize the essence of text and audio in the video. It is observed that the ranking, text, audio, and semantics of video frames are essential for video summary evaluation. 
+		</p>
+		<p style="margin-left: 3cm;color: azure;text-align: justify;text-justify: center;margin-right: 3cm;">
+			To portray the accurate summarization of a video we propose to approach the problem in a twofold manner, thus we divide the problem statement into three parts: Subtitles in the selected YouTube video is the first part. Secondly, the audio of the file is 
+			 taken into consideration. 
+		</p>
+	</div>
 </body>
 
 </html>

@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='Data.css') }}">
-    </head>
+
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Data.css') }}">
+</head>
 
 <body>
+    <form action="{{url_for('Summarizer') }}" method="post">
+        <input type="submit" class="btn btn-primary" value="Back To Summarizer"
+            style="margin-left: 18cm;margin-top: 2cm;">
+    </form>
+    <br>
     <table border="1px solid black" class="center">
         <tr>
             <th>Text</th>
@@ -13,7 +21,7 @@
             <th>End Time</th>
             <th>Video</th>
             <th>Audio</th>
-            <!-- <th>Graph-Audio</th> -->
+            <th>Graph-Audio</th>
         </tr>
         {% for item in srt_data %}
         <tr>
@@ -31,12 +39,9 @@
                     <source src="{{item['audiopath']}}" type="audio/mp3">
                 </audio>
             </td>
-            <!-- <td>
-                <image width="200" height="200" controls>
-                    <source src="{{item['graphpath']}}" type="image/jpeg">
-                </image>
+            <td>
+                <img src="{{item['graphpath']}}" width="300" height="200">
             </td>
-             -->
         </tr>
         {% endfor %}
 

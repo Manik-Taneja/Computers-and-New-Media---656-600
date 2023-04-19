@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from Backend.processing import *
+import librosa
+import matplotlib.pyplot as plt
 app = Flask(__name__)
 
 @app.route("/home", methods=["GET", "POST"])
@@ -25,6 +27,22 @@ def handle_Summarizer():
         YTLink = request.form["Link"]
         srt_data = get_link(YTLink)
         return render_template("data.html", srt_data = srt_data)
+    
+@app.route("/ProposedSolution", methods=["GET", "POST"])
+def ProposedSolution():
+    return render_template("ProposedSolution.html")
 
+
+# @app.route("/graph", methods=["GET", "POST"])
+# def graph():
+#     plt.rcParams["figure.figsize"] = [7.50, 3.50]
+#     plt.rcParams["figure.autolayout"] = True
+#     input_data = read('static/Audio/output_1.wav')
+#     audio = input_data[1]
+#     plt.plot(audio[0:1024])
+#     plt.ylabel("Amplitude")
+#     plt.xlabel("Time")
+#     plt.show()
+#     return "GOT IT"
 
 app.run(port=8000, debug=True)

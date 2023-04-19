@@ -3,25 +3,7 @@
 <head>
 	<title>Computers and New Media | YouTube Summarizer</title>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<style type="text/css">
-		body {
-			background-image: url('https://wallpaper-house.com/data/out/10/wallpaper2you_391889.png');
-			background-size: cover;
-			background-repeat: no-repeat;
-		}
-		.container {
-			background-color: rgba(255, 255, 255, 0.748);;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0px 0px 10px #888;
-			max-width: 500px;
-			margin: 150px auto 0;
-		}
-		h1 {
-			text-align: center;
-			margin-bottom: 30px;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ url_for('static', filename='Summarizer.css') }}">
 </head>
 <body>
 	<div class="container">
@@ -33,9 +15,9 @@
 				<input type="text" class="form-control" name="Link" placeholder="Link" id="Link" required>
 			</div>
 			<input type="submit" class="btn btn-primary" value="Submit">
-			<form action="{{url_for('home') }}" method="post">
-				<input type="submit" class="btn btn-primary" value="Back To Home" style="float: right;">
-			</form>
+		</form>
+		<form action="{{url_for('home') }}" method="post">
+			<input type="submit" class="btn btn-primary" value="Back To Home" style="float: right; margin-top: -1cm;">
 		</form>
 	</div>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
