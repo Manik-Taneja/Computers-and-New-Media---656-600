@@ -32,6 +32,10 @@ def handle_Summarizer():
 def ProposedSolution():
     return render_template("ProposedSolution.html")
 
+@app.route("/videoSummarized", methods=["GET", "POST"])
+def videoSummarized():
+    return render_template("videoSummarized.html")
+
 
 # @app.route("/graph", methods=["GET", "POST"])
 # def graph():

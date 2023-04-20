@@ -38,6 +38,16 @@ def srt_generation(id):
     srt = YouTubeTranscriptApi.get_transcript(id)
     return srt
 
+def joinVideo(videoPath):
+    print("THE VIDEOPATH IS HERE: {}".format(videoPath))
+    return
+
+# subprocess.call(['ffmpeg', '-i', outputName, '-b:a', '192K', '-vn', outputAudio])
+
+# def joinAudio(audioPath):
+
+
+
 def get_link(Link):
     id = generate_id(Link)
     srt_data = srt_generation(id)
@@ -72,14 +82,14 @@ def get_link(Link):
 
     ###############################################################################################################
 
-    # trimmed_data = trimmed_data[:10]
+    # trimmed_data = trimmed_data[:1]
 
     ###############################################################################################################
 
                                         # INPUT PATH - ALREADY DOWNLOADED FILE
 
     ###############################################################################################################
-    counter = 1
+    counter = 100
     clip = VideoFileClip("static/Input/Link.mp4")
 
     ###############################################################################################################
@@ -96,6 +106,8 @@ def get_link(Link):
 
     ###############################################################################################################
     sum_duration = 0
+    finalVideo = []
+    finalAudio = []
     for row in range(len(trimmed_data)):
         print("Creating subclip: {} ".format(counter))
         ###############################################################################################################
@@ -140,26 +152,6 @@ def get_link(Link):
             p = librosa.display.waveshow(x, sr=sr)
             fig.savefig(outputGraph)
 
-
-        # plt.rcParams["figure.figsize"] = [7.50, 3.50]
-        # plt.rcParams["figure.autolayout"] = True
-        # input_data = read(outputAudio)
-        # audio = input_data[1]
-        # plt.plot(audio[0:1024])
-        # plt.ylabel("Amplitude")
-        # plt.xlabel("Time")
-        # plt.savefig(outputGraph)
-        # sample_rate, samples = wavfile.read(outputAudio)
-        # frequencies, times, spectrogram = signal.spectrogram(samples, sample_rate)
-        # print("F: {}".format(frequencies))
-        # print("T: {}".format(times))
-        # print("S: {}".format(spectrogram))
-        # plt.pcolormesh(times, frequencies, spectrogram)
-        # plt.imshow(spectrogram)
-        # plt.ylabel('Frequency [Hz]')
-        # plt.xlabel('Time [sec]')
-        # plt.savefig(outputGraph)
-
         ###############################################################################################################
 
                                                         # DEFINING PATHS
@@ -172,8 +164,10 @@ def get_link(Link):
             trimmed_data[row]['graphpath'] = outputGraph
         counter += 1
         sum_duration +=  trimmed_data[row]['duration']
+        finalVideo.append(outputName)
+
+        joinVideo(outputName)
+
     print("Total Duration of the final video: {}".format(round(sum_duration/60,3)))
-    # print(trimmed_data)
-
-
+    subprocess.call(["./videoCombine.sh"], shell=True)
     return trimmed_data

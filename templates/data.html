@@ -10,7 +10,10 @@
 <body>
     <form action="{{url_for('Summarizer') }}" method="post">
         <input type="submit" class="btn btn-primary" value="Back To Summarizer"
-            style="margin-left: 18cm;margin-top: 2cm;">
+            style="margin-left: 17cm;margin-top: 2cm;">
+    </form>
+    <form action="{{url_for('videoSummarized') }}" method="post">
+        <input type="submit" class="btn btn-primary" value="See full video" style="margin-left: 30cm; margin-top: -1.65cm;">
     </form>
     <br>
     <table border="1px solid black" class="center">
